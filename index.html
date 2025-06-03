@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <title>Store Angel - POS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Store Angel</h1>
+    <p class="tagline">Sell Smart, Rest Easy</p>
+  </header>
+
+  <!-- Welcome Page -->
+  <div id="welcomeScreen" class="page active">
+    <h2>Welcome to Store Angel</h2>
+    <p>Manage your store with ease</p>
+    <button onclick="navigateTo('stockPage')">Enter App</button>
+  </div>
+
+  <!-- STOCK PAGE -->
+  <div id="stockPage" class="page">
+    <section class="form-section">
+      <h2>Add Product to Stock</h2>
+      <form id="addProductForm">
+        <input type="text" id="productName" placeholder="Product Name" required />
+        <input type="number" id="productQuantity" placeholder="Unit Quantity" required />
+        <input type="text" id="productUnitType" placeholder="Unit Type (e.g. bottle, carton)" required />
+        <input type="number" id="productPrice" placeholder="Price (₦)" required />
+        <button type="submit">Add to Stock</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- SALES PAGE -->
+  <div id="salesPage" class="page">
+    <section class="form-section">
+      <h2>Sales Point</h2>
+      <form id="salesForm">
+        <div id="productInputs"></div>
+        <button type="button" onclick="addProductInput()">+ Add Another Product</button>
+        <select id="paymentMode" required>
+          <option value="">Select Payment Mode</option>
+          <option value="Cash">Cash</option>
+          <option value="Transfer">Transfer</option>
+          <option value="POS">POS</option>
+        </select>
+        <h4 id="totalAmount">Total: ₦0</h4>
+        <button type="submit">Sell</button>
+      </form>
+
+      <div class="receipt">
+        <h3>Customer Receipt</h3>
+        <pre id="receiptOutput"></pre>
+        <button onclick="printReceipt()">🖨️ Print Receipt</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- DASHBOARD PAGE -->
+  <div id="dashboardPage" class="page">
+    <section class="form-section">
+      <h2>Stock Dashboard</h2>
+      <table id="stockTable" border="1" width="100%">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Name</th>
+            <th>Unit</th>
+            <th>Price (₦)</th>
+            <th>Quantity</th>
+            <th>Stocked At</th>
+          </tr>
+        </thead>
+        <tbody id="stockTableBody"></tbody>
+      </table>
+
+      <h2>Sales History</h2>
+      <select id="filterPayment" onchange="renderSalesHistory()">
+        <option value="">All</option>
+        <option value="Cash">Cash</option>
+        <option value="Transfer">Transfer</option>
+        <option value="POS">POS</option>
+      </select>
+      <div id="salesHistory"></div>
+
+      <h2>Sales Summary</h2>
+      <div id="salesSummary"></div>
+
+      <button onclick="exportToCSV()">Export to CSV</button>
+    </section>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <div onclick="navigateTo('stockPage')"><i class="fas fa-box"></i><span>Stock</span></div>
+    <div onclick="navigateTo('salesPage')"><i class="fas fa-cash-register"></i><span>Sales</span></div>
+    <div onclick="navigateTo('dashboardPage')"><i class="fas fa-chart-line"></i><span>Dashboard</span></div>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>

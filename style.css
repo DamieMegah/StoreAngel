@@ -71,7 +71,55 @@ button:hover {
   white-space: pre-wrap;
 }
 
+.page {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.page.active {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: none;
+  background: #0c2d48;
+  color: white;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0;
+  z-index: 999;
+}
+
+.bottom-nav div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.bottom-nav i {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+/* Show nav only on mobile */
 @media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+  }
+
+  header {
+    padding-bottom: 4rem; /* avoid clash with nav */
+  }
+
+
   main {
     padding: 1rem;
   }
